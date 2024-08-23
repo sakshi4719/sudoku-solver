@@ -49,13 +49,13 @@ def solve_sudoku(puzzle):
 def print_sudoku(puzzle):
     for r in range(9):
         if r % 3 == 0 and r != 0:
-            print("-" * 21)  # Print a horizontal line after every 3 rows
+            print("-" * 21) 
         for c in range(9):
             if c % 3 == 0 and c != 0:
-                print(" | ", end="")  # Print a vertical line after every 3 columns
+                print(" | ", end="") 
 
             if c == 8:
-                print(puzzle[r][c])  # Print the last number in the row and move to the next line
+                print(puzzle[r][c]) 
             else:
                 print(puzzle[r][c], end=" ")
 
