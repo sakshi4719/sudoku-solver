@@ -7,8 +7,8 @@ def find_next_empty(puzzle):
         for c in range(9): 
             if puzzle[r][c] == -1:
                 return r, c
-    return None, None  
 
+    return None, None  
 def is_valid(puzzle, guess, row, col):
 
     row_vals = puzzle[row]
@@ -26,6 +26,7 @@ def is_valid(puzzle, guess, row, col):
         for c in range(col_start, col_start + 3):
             if puzzle[r][c] == guess:
                 return False
+
     return True
 
 def solve_sudoku(puzzle):
@@ -40,8 +41,23 @@ def solve_sudoku(puzzle):
             puzzle[row][col] = guess
             if solve_sudoku(puzzle):
                 return True
+        
         puzzle[row][col] = -1
+
     return False
+
+def print_sudoku(puzzle):
+    for r in range(9):
+        if r % 3 == 0 and r != 0:
+            print("-" * 21)  # Print a horizontal line after every 3 rows
+        for c in range(9):
+            if c % 3 == 0 and c != 0:
+                print(" | ", end="")  # Print a vertical line after every 3 columns
+
+            if c == 8:
+                print(puzzle[r][c])  # Print the last number in the row and move to the next line
+            else:
+                print(puzzle[r][c], end=" ")
 
 if __name__ == '__main__':
     example_board = [
@@ -57,5 +73,8 @@ if __name__ == '__main__':
         [6, 7, -1,   1, -1, 5,   -1, 4, -1],
         [1, -1, 9,   -1, -1, -1,   2, -1, -1]
     ]
-    print(solve_sudoku(example_board))
-    pprint(example_board)
+    if solve_sudoku(example_board):
+        print("Sudoku solved successfully!")
+        print_sudoku(example_board)
+    else:
+        print("Failed to solve Sudoku.")
